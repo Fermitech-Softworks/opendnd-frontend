@@ -3,39 +3,38 @@ import Form from 'react-bootstrap/Form';
 import getEventValue from '../utils/getEventValue';
 import instanceUrlRegex from '../utils/valid/instanceUrlRegex';
 import apiRequest from '../utils/apiRequest';
-import { useEffect, useState } from 'preact/hooks';
+import useFormValidator from '../hooks/useFormValidator';
 
 export default function(props) {
-	const [instanceStatus, setInstanceStatus] = useState({
-		validity: null,
-		message: null
-	});
-
-	useEffect(() => {
-		if(!Boolean(instanceUrlRegex.test(props.value))) {
-			setInstanceStatus({
+	const instanceStatus = useFormValidator(props.value, (value, setStatus) => {
+		if(!Boolean(instanceUrlRegex.test(value))) {
+			setStatus({
 				validity: false,
 				message: "L'URL che hai inserito non è valido."
 			});
 			return;
 		}
 
-		apiRequest(props.value, "GET", "/api/royalnet/version/v1").then((data) => {
-			setInstanceStatus({
-				validity: true,
-				message: `Royalnet ${data["semantic"]}`
-			});
+		apiRequest(value, "GET", "/api/royalnet/version/v1").then((data) => {
+			if(value === props.value) {
+				setStatus({
+					validity: true,
+					message: `Royalnet ${data["semantic"]}`
+				});
+			}
 		}).catch((err) => {
-			setInstanceStatus({
-				validity: false,
-				message: "Non sembra esserci nessuna istanza a quell'URL... Sei sicuro che quella sia un'istanza di Royalnet?"
-			});
+			if(value === props.value) {
+				setStatus({
+					validity: false,
+					message: "Non sembra esserci nessuna istanza a quell'URL... Sei sicuro che quella sia un'istanza di Royalnet?"
+				});
+			}
 		});
-		setInstanceStatus({
+		setStatus({
 			validity: null,
 			message: ""
 		});
-	}, [props.value]);
+	});
 
 	return (
 		<Card>
@@ -50,7 +49,7 @@ export default function(props) {
 						</Form.Label>
 						<Form.Control
 							type={"text"}
-							placeholder={"https://example.org"}
+							placeholder={"https://lo.steffo.eu:8080"}
 							value={props.value}
 							onChange={getEventValue(props.setValue)}
 							isInvalid={instanceStatus.validity === false}

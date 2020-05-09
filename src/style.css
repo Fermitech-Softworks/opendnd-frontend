@@ -6,3 +6,9 @@ html, body {
 h1 {
 	text-align: center;
 }
+
+
+/* Add a bit of margin between the navbar and the rest of the page */
+nav.navbar {
+	margin-bottom: 16px;
+}
