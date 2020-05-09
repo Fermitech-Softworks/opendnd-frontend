@@ -1,6 +1,3 @@
-import { useContext } from 'preact/hooks';
-import InstanceUrl from '../contexts/InstanceUrl';
-
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 class ApiError extends Error {
 	constructor(errorCode, errorType, errorArgs, ...params) {
@@ -18,6 +15,10 @@ class ApiError extends Error {
 
 
 async function apiRequest(baseUrl, method, path, args) {
+	if(args === undefined || args === null) {
+		args = {};
+	}
+
 	let body;
 	let url;
 	if(method === "GET") {
