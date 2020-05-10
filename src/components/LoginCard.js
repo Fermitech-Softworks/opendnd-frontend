@@ -3,7 +3,6 @@ import Form from 'react-bootstrap/Form';
 import getEventValue from '../utils/getEventValue';
 import apiRequest from '../utils/apiRequest';
 import { useState } from 'preact/hooks';
-import { route } from 'preact-router';
 
 export default function(props) {
 	const [instanceUrl, setInstanceUrl, instanceUrlStatus] = props.instanceUrlTrio;
@@ -18,9 +17,7 @@ export default function(props) {
 			username: username,
 			password: password
 		}).then((data) => {
-			props.setInstanceUrl(instanceUrl);
-			props.setLoginStatus(data);
-			route("/");
+			props.onSuccessfulLogin(instanceUrl, data);
 		}).catch((err) => {
 			setLoginError(err);
 		}).finally(() => {

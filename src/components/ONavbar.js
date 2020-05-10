@@ -18,9 +18,9 @@ export default function() {
 	}
 	else {
 		loginElements = (
-			<Navbar.Text href={"/"}>
+			<Nav.Link href={"/profile/me"}>
 				{loginStatus.user.username} @ {instanceUrl}
-			</Navbar.Text>
+			</Nav.Link>
 		)
 	}
 
