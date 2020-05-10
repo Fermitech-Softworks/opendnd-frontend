@@ -8,7 +8,7 @@ export default function(method, path, body) {
 
 	useEffect(() => {
 		apiRequest(instanceUrl, method, path, body).then(d => setData(d));
-	});
+	}, [instanceUrl, method, path, body]);
 
 	if(data === null) return "Loading...";
 	else return data.toString();

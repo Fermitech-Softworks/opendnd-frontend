@@ -6,10 +6,11 @@ import ONavbar from './components/ONavbar';
 import LoginStatus from './contexts/LoginStatus';
 import Router from 'preact-router';
 import { Container } from 'react-bootstrap';
-import InstanceSelector from './components/InstanceSelector';
+import LoginCard from './components/LoginCard';
+import RegistrationCard from './components/RegistrationCard';
 
 export default function() {
-	const [instanceUrl, setInstanceUrl] = useState("https://rygapi.steffo.eu");
+	const [instanceUrl, setInstanceUrl] = useState("http://lo.steffo.eu:44445");
 	const [loginStatus, setLoginStatus] = useState(null);
 
 	return (
@@ -18,8 +19,8 @@ export default function() {
 				<ONavbar/>
 				<Container>
 					<Router>
-						<InstanceSelector value={instanceUrl} setValue={setInstanceUrl} path={"/instance"}>instance</InstanceSelector>
-						<div path={"/me"}>profile/login</div>
+						<LoginCard path={"/login"} setInstanceUrl={setInstanceUrl} setLoginStatus={setLoginStatus}/>
+						<RegistrationCard path={"/register"} setInstanceUrl={setInstanceUrl} setLoginStatus={setLoginStatus}/>
 						<div default>default</div>
 					</Router>
 				</Container>

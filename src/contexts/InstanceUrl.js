@@ -1,3 +1,3 @@
 import { createContext } from 'preact';
 
-export default createContext("http://localhost:44445");
+export default createContext("http://lo.steffo.eu:44445");

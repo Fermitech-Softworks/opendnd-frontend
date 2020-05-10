@@ -5,8 +5,27 @@ import LoginStatus from '../contexts/LoginStatus';
 import InstanceUrl from '../contexts/InstanceUrl';
 
 export default function() {
-	const loginStatus = useContext(LoginStatus);
 	const instanceUrl = useContext(InstanceUrl);
+	const loginStatus = useContext(LoginStatus);
+
+	let loginElements;
+	if(loginStatus === null) {
+		loginElements = [
+			<Nav.Link href={"/register"}>
+				Registrati
+			</Nav.Link>,
+			<Nav.Link href={"/login"}>
+				Login
+			</Nav.Link>
+		];
+	}
+	else {
+		loginElements = (
+			<Navbar.Text href={"/"}>
+				{loginStatus.user.username} @ {instanceUrl}
+			</Navbar.Text>
+		)
+	}
 
 	return (
 		<Navbar bg={"dark"} variant={"dark"} expand={"lg"}>
@@ -16,15 +35,7 @@ export default function() {
 				<Nav className="mr-auto">
 				</Nav>
 				<Nav>
-					<Nav.Link href={"/me"}>
-						{String(loginStatus)}
-					</Nav.Link>
-					<Navbar.Text>
-						@
-					</Navbar.Text>
-					<Nav.Link href={"/instance"}>
-						{instanceUrl}
-					</Nav.Link>
+					{loginElements}
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>

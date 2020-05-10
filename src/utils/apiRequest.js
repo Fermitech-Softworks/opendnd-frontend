@@ -14,7 +14,7 @@ class ApiError extends Error {
 }
 
 
-async function apiRequest(baseUrl, method, path, args) {
+async function apiRequest(baseUrl, method, path, args, abortSignal) {
 	if(args === undefined || args === null) {
 		args = {};
 	}
@@ -40,7 +40,8 @@ async function apiRequest(baseUrl, method, path, args) {
 	//Make the request
 	let response = await fetch(url, {
 		method: method,
-		body: body
+		body: body,
+		signal: abortSignal,
 	});
 	//Parse the response as JSON
 	let json = await response.json();
