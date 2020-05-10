@@ -10,14 +10,11 @@ export default function() {
 
 	let loginElements;
 	if(loginStatus === null) {
-		loginElements = [
-			<Nav.Link href={"/register"}>
-				Registrati
-			</Nav.Link>,
+		loginElements = (
 			<Nav.Link href={"/login"}>
 				Login
 			</Nav.Link>
-		];
+		);
 	}
 	else {
 		loginElements = (

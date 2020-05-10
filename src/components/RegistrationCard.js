@@ -116,7 +116,7 @@ export default function(props) {
 					</Form.Group>
 					<Form.Group>
 						<Button disabled={loginWorking || instanceUrlStatus.validity !== true || usernameStatus.validity !== true || passwordStatus.validity !== true} onClick={login}>
-							Login
+							Crea account
 						</Button>
 					</Form.Group>
 					<Form.Group>

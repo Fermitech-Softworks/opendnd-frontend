@@ -8,6 +8,7 @@ import Router from 'preact-router';
 import { Container } from 'react-bootstrap';
 import LoginCard from './components/LoginCard';
 import RegistrationCard from './components/RegistrationCard';
+import LoginAndRegistration from './components/LoginAndRegistration';
 
 export default function() {
 	const [instanceUrl, setInstanceUrl] = useState("http://lo.steffo.eu:44445");
@@ -19,8 +20,7 @@ export default function() {
 				<ONavbar/>
 				<Container>
 					<Router>
-						<LoginCard path={"/login"} setInstanceUrl={setInstanceUrl} setLoginStatus={setLoginStatus}/>
-						<RegistrationCard path={"/register"} setInstanceUrl={setInstanceUrl} setLoginStatus={setLoginStatus}/>
+						<LoginAndRegistration path={"/login"} setInstanceUrl={setInstanceUrl} setLoginStatus={setLoginStatus}/>
 						<div default>default</div>
 					</Router>
 				</Container>
