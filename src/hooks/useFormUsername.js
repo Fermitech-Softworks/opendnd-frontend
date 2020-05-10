@@ -4,7 +4,11 @@ import usernameRegex from '../utils/valid/usernameRegex';
 
 export default function() {
 	const [username, setUsername] = useState("");
-	const usernameStatus = useFormValidator(username, (value, setStatus) => {
+
+	let lowerUsername = username.toLowerCase();
+	let filteredUsername = lowerUsername.replace(/[^a-z]/g, "");
+
+	const usernameStatus = useFormValidator(filteredUsername, (value, setStatus) => {
 		if(value.length === 0) {
 			setStatus({
 				validity: null,
@@ -27,5 +31,5 @@ export default function() {
 		});
 	});
 
-	return [username, setUsername, usernameStatus]
+	return [filteredUsername, setUsername, usernameStatus]
 }

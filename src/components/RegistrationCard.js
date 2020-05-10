@@ -4,16 +4,12 @@ import getEventValue from '../utils/getEventValue';
 import apiRequest from '../utils/apiRequest';
 import { useState } from 'preact/hooks';
 import { route } from 'preact-router';
-import useFormInstanceUrl from '../hooks/useFormInstanceUrl';
-import useFormUsername from '../hooks/useFormUsername';
-import useFormPassword from '../hooks/useFormPassword';
-import useFormEmail from '../hooks/useFormEmail';
 
 export default function(props) {
-	const [instanceUrl, setInstanceUrl, instanceUrlStatus] = useFormInstanceUrl();
-	const [username, setUsername, usernameStatus] = useFormUsername();
-	const [email, setEmail, emailStatus] = useFormEmail();
-	const [password, setPassword, passwordStatus] = useFormPassword();
+	const [instanceUrl, setInstanceUrl, instanceUrlStatus] = props.instanceUrlTrio;
+	const [username, setUsername, usernameStatus] = props.usernameTrio;
+	const [email, setEmail, emailStatus] = props.emailTrio;
+	const [password, setPassword, passwordStatus] = props.passwordTrio;
 
 	const [loginWorking, setLoginWorking] = useState(false);
 	const [loginError, setLoginError] = useState(null);
