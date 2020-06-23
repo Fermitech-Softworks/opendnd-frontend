@@ -8,6 +8,7 @@ import { Container } from 'react-bootstrap';
 import LoginAndRegistration from './routes/LoginAndRegistration';
 import Profile from './routes/Profile';
 import useLoginDataStorage from './hooks/useLoginDataStorage';
+import Dashboard from './routes/Dashboard';
 
 export default function() {
 	const [instanceUrl, loginStatus, onSuccessfulLogin, requestLogout] = useLoginDataStorage();
@@ -18,6 +19,7 @@ export default function() {
 				<ONavbar/>
 				<Container>
 					<Router>
+						<Dashboard path={"/"}/>
 						<LoginAndRegistration path={"/login"} onSuccessfulLogin={onSuccessfulLogin}/>
 						<Profile path={"/profile/me"} requestLogout={requestLogout}/>
 						<div default><span style={"font-family: 'Impact', sans-serif; font-size: 72px;"}>TESTO DI SOPRA<br/><br/><br/>TESTO DI SOTTO</span></div>
